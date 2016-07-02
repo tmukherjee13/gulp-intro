@@ -10,10 +10,12 @@ var gulp = require('gulp'),
     size = require('gulp-size'),
     gutil = require('gulp-util'),
     jshint = require('gulp-jshint'),
+    imageResize = require('gulp-image-resize'),
+   jimp = require('gulp-jimp'),
     clean = require('gulp-clean');
 
-var SOURCE_DIR = 'files/source/';
-var BUILD_DIR = 'files/build/';
+var SOURCE_DIR = '/var/www/killercarpet/images/source/';
+var BUILD_DIR = '/var/www/killercarpet/images/build/';
 var PRODUCTION_JS_FILE = 'production.min.js';
 var PRODUCTION_CSS_FILE = 'production.min.css';
 
@@ -64,10 +66,19 @@ gulp.task('optimize-images',['clean'], function() {
     return gulp.src(SOURCE_DIR+'**/*.{jpg,jpeg,png,gif,JPG,JPEG}')
     	.pipe(size())
         .pipe(imagemin({
-            optimizationLevel: 9,
+            optimizationLevel: 6,
             progessive: true,
             interlaced: true
         }))
+
+	.pipe(imageResize({ 
+      width : 900
+         }))
+	.pipe(jimp({
+        '-1': {
+            rotate: 90,
+            }
+}))
         .pipe(gulp.dest(BUILD_DIR))
         .pipe(size());
 });
