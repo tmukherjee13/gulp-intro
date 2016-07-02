@@ -11,7 +11,7 @@ var gulp = require('gulp'),
     gutil = require('gulp-util'),
     jshint = require('gulp-jshint'),
     imageResize = require('gulp-image-resize'),
-   jimp = require('gulp-jimp'),
+    jimp = require('gulp-jimp'),
     clean = require('gulp-clean');
 
 var SOURCE_DIR = '/var/www/killercarpet/images/source/';
@@ -66,19 +66,21 @@ gulp.task('optimize-images',['clean'], function() {
     return gulp.src(SOURCE_DIR+'**/*.{jpg,jpeg,png,gif,JPG,JPEG}')
     	.pipe(size())
         .pipe(imagemin({
-            optimizationLevel: 6,
+            optimizationLevel: 9,
             progessive: true,
             interlaced: true
         }))
 
-	.pipe(imageResize({ 
-      width : 900
-         }))
-	.pipe(jimp({
-        '-1': {
-            rotate: 90,
+	    .pipe(imageResize(
+            {
+             width : 900
             }
-}))
+        ))
+	    .pipe(jimp(
+            {
+             rotate: 90
+            }
+        ))
         .pipe(gulp.dest(BUILD_DIR))
         .pipe(size());
 });
