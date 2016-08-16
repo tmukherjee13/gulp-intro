@@ -14,8 +14,8 @@ var gulp = require('gulp'),
     jimp = require('gulp-jimp'),
     clean = require('gulp-clean');
 
-var SOURCE_DIR = '/var/www/killercarpet/images/source/';
-var BUILD_DIR = '/var/www/killercarpet/images/build/';
+var SOURCE_DIR = '/var/www/images/source/';
+var BUILD_DIR = '/var/www/images/build/';
 var PRODUCTION_JS_FILE = 'production.min.js';
 var PRODUCTION_CSS_FILE = 'production.min.css';
 
